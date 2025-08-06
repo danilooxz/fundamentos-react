@@ -35,7 +35,7 @@ export default function Login() {
 
           <Text color="gray.400" fontSize="lg" fontWeight="normal">Se você já é membro, você pode fazer login com seu endereço de e-mail e senha.</Text>
 
-          <VStack as="form" onSubmit={handleSubmit((data: signInFormData) => console.log(data))} align="flex-start" gap={6} mt={10}>
+          <VStack as="form" onSubmit={handleSubmit(handleSignIn)} align="flex-start" gap={6} mt={10}>
             <Field.Root invalid={!!errors.email}>
               <Field.Label color="gray.500" fontSize="md">
                 Email

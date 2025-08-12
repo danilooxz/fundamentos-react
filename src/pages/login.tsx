@@ -6,6 +6,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSession } from "@/contexts/SessionContext";
+import { useEffect } from "react";
 
 
 const signInFormSchema = z.object({
@@ -16,13 +18,25 @@ const signInFormSchema = z.object({
 type signInFormData = z.infer<typeof signInFormSchema>
 
 export default function Login() {
+  const { user, updateUser } = useSession();
+
   const {register, handleSubmit, formState: {errors}} = useForm({
     resolver: zodResolver(signInFormSchema)
   });
 
   function handleSignIn(data: signInFormData){
     console.log(data);
+    updateUser({
+      id: "teste",
+      email: data.email,
+      cpf: "34234235",
+      fullName: "Danilo Marcon",
+      avatarUrl: "https://avatars.githubusercontent.com/u/128654904?v=4"})
   }
+
+  useEffect(() => {
+    console.log(user);
+  }, [user])
 
   return(
     <Flex w="100vw" h="100vh">

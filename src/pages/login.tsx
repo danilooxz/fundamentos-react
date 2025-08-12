@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "@/contexts/SessionContext";
 import { useEffect } from "react";
 
-
 const signInFormSchema = z.object({
   email: z.email("Digite um e-mail válido").nonempty("O e-mail é obrigatório"),
   password: z.string().nonempty("A senha é obrigatória").min(8, "A senha deve pelo menos 8 caracteres"),

@@ -1,46 +1,58 @@
-import { Button, Flex, Heading, HStack, Image, Input, Stack, Text, VStack, Link as ChakraLink, Field } from "@chakra-ui/react";
-import loginImage from "../../public/assets/login-image.gif";
-import { Checkbox } from "@/components/ui/checkbox";
-import NextLink from "next/link"
-import { PasswordInput } from "@/components/ui/password-input";
+import { Button, Link as ChakraLink, Field, Flex, Heading, HStack, Image, Input, Stack, Text, VStack } from "@chakra-ui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Checkbox } from "@/components/ui/checkbox";
+import { PasswordInput } from "@/components/ui/password-input";
+import { toaster } from "@/components/ui/toaster";
 import { useSession } from "@/contexts/SessionContext";
-import { useEffect } from "react";
+import loginImage from "../../public/assets/login-image.gif";
 
 const signInFormSchema = z.object({
-  email: z.email("Digite um e-mail válido").nonempty("O e-mail é obrigatório"),
-  password: z.string().nonempty("A senha é obrigatória").min(8, "A senha deve pelo menos 8 caracteres"),
+  email: z.email("Digite um e-mail válido").nonempty("O e-mail é obrigatorio"),
+  password: z.string().nonempty("A senha é obrigatoria").min(8, "A senha deve ter pelo menos 8 caracteres"),
 });
 
-type signInFormData = z.infer<typeof signInFormSchema>
+type SignInFormData = z.infer<typeof signInFormSchema>;
 
 export default function Login() {
-  const { user, updateUser } = useSession();
+  const { user, signIn } = useSession();
 
-  const {register, handleSubmit, formState: {errors}} = useForm({
+  const router = useRouter();
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(signInFormSchema)
   });
 
-  function handleSignIn(data: signInFormData){
-    console.log(data);
-    updateUser({
-      id: "teste",
-      email: data.email,
-      cpf: "34234235",
-      fullName: "Danilo Marcon",
-      avatarUrl: "https://avatars.githubusercontent.com/u/128654904?v=4"})
+  async function handleSignIn({ email, password }: SignInFormData) {
+    const promise = new Promise<void>(async (resolve, reject) => {
+      try {
+        await signIn({ email, password });
+        resolve();
+        router.push('/');
+      } catch {
+        reject();
+      }
+    });
+
+    toaster.promise(promise, {
+      success: { title: 'Login realizado com sucesso.' },
+      error: { title: 'E-mail ou senha incorretos.' },
+      loading: { title: 'Carregando informações do usuário, aguarde...' }
+    });
   }
 
   useEffect(() => {
     console.log(user);
   }, [user])
 
-  return(
+  return (
     <Flex w="100vw" h="100vh">
       <Flex w="50%" bg="#2C73EB" align="center" justify="center">
-        <Image w={500} h={500} src={loginImage.src}/>
+        <Image w={500} h={500} src={loginImage.src} />
       </Flex>
       <VStack w="50%" justify="center">
         <Stack>
@@ -65,7 +77,7 @@ export default function Login() {
               <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
             </Field.Root>
 
-            <Checkbox color="gray.500" colorPalette="blue" fontSize="md" fontWeight="medium">
+            <Checkbox colorPalette="blue" color="gray.500" fontSize="md" fontWeight="medium">
               Lembre-me
             </Checkbox>
 
@@ -80,7 +92,6 @@ export default function Login() {
               <NextLink href="/sign-up">Clique aqui!</NextLink>
             </ChakraLink>
           </HStack>
-
         </Stack>
       </VStack>
     </Flex>

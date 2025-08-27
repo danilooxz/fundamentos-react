@@ -1,5 +1,4 @@
 import { Flex, Group, Separator } from "@chakra-ui/react";
-import { useColorMode } from "../ui/color-mode";
 import { ColorMode } from "./ColorMode";
 import { Help } from "./Help";
 import { Logo } from "./Logo";
@@ -9,7 +8,6 @@ import { Profile } from "./Profile";
 import { Settings } from "./Settings";
 
 export function DefaultHeader() {
-  const { toggleColorMode, colorMode } = useColorMode();
 
   return (
     <Flex w="full" justify="space-between" borderBottomWidth={1} py={2} px={4}>

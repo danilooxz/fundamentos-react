@@ -1,9 +1,10 @@
-import { Card, Flex, FormatNumber, HStack, Icon, Stat } from "@chakra-ui/react";
-import { DefaultLayout } from "@/layouts/DefaultLayout";
-import { IoPeopleSharp } from "react-icons/io5";
+import { HStack } from "@chakra-ui/react";
 import { FaGraduationCap } from "react-icons/fa";
-import { ImBooks } from "react-icons/im";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import { ImBooks } from "react-icons/im";
+import { IoPeopleSharp } from "react-icons/io5";
+import { IndicatorCard } from "@/components/IndicatorCard";
+import { DefaultLayout } from "@/layouts/DefaultLayout";
 
 export default function Home() {
   return (
@@ -11,79 +12,38 @@ export default function Home() {
       tittle="Dashboard Acadêmico"
       descripition="Visão geral do sistema universitáro"
     >
-    <HStack>
-      <Card.Root>
-        <Card.Body flexDir="row" alignItems="center" gap={6}>
-          <Stat.Root>
-            <Stat.Label fontSize="md"> Total de Estudantes </Stat.Label>
-            <Stat.ValueText>
-              <FormatNumber value={2324} />
-            </Stat.ValueText>
-              <Stat.UpIndicator alignSelf="start" > +12% from last week </Stat.UpIndicator>
-            </Stat.Root>
+      <HStack gap={8}>
+        <IndicatorCard
+          label="Total de Estudantes"
+          value={2345}
+          indicator="+33% este mes"
+          icon={IoPeopleSharp}
+          colorPallete="blue"
+        />
 
-              <Flex justify="center" align="center" backgroundColor="blue.200" rounded="lg" p={4}>
-                <Icon size="xl" color="blue.700">
-                  <IoPeopleSharp />
-                </Icon>
-              </Flex>
-          </Card.Body>
-        </Card.Root>
+        <IndicatorCard
+          label="Professor Ativos"
+          value={53}
+          indicator="+1% este mes"
+          icon={FaGraduationCap}
+          colorPallete="green"
+        />
 
-        <Card.Root>
-        <Card.Body flexDir="row" alignItems="center" gap={6}>
-          <Stat.Root>
-            <Stat.Label fontSize="md"> Professores Ativos </Stat.Label>
-            <Stat.ValueText>
-              <FormatNumber value={2324} />
-            </Stat.ValueText>
-              <Stat.UpIndicator alignSelf="start" > +12% from last week </Stat.UpIndicator>
-            </Stat.Root>
+        <IndicatorCard
+          label="Cursos Oferecidos"
+          value={17}
+          indicator="+3% este mes"
+          icon={ImBooks}
+          colorPallete="red"
+        />
 
-              <Flex justify="center" align="center" backgroundColor="green.200" rounded="lg" p={4}>
-                <Icon size="xl" color="blue.700">
-                  <FaGraduationCap />
-                </Icon>
-              </Flex>
-          </Card.Body>
-        </Card.Root>
-
-        <Card.Root>
-        <Card.Body flexDir="row" alignItems="center" gap={6}>
-          <Stat.Root>
-            <Stat.Label fontSize="md"> Cursos Oferecidos </Stat.Label>
-            <Stat.ValueText>
-              <FormatNumber value={2324} />
-            </Stat.ValueText>
-              <Stat.UpIndicator alignSelf="start" > +12% from last week </Stat.UpIndicator>
-            </Stat.Root>
-
-              <Flex justify="center" align="center" backgroundColor="red.200" rounded="lg" p={4}>
-                <Icon size="xl" color="blue.700">
-                  <ImBooks />
-                </Icon>
-              </Flex>
-          </Card.Body>
-        </Card.Root>
-
-        <Card.Root>
-        <Card.Body flexDir="row" alignItems="center" gap={6}>
-          <Stat.Root>
-            <Stat.Label fontSize="md"> Taxa de Aprovação </Stat.Label>
-            <Stat.ValueText>
-              <FormatNumber value={2324} />
-            </Stat.ValueText>
-              <Stat.UpIndicator alignSelf="start" > +12% from last week </Stat.UpIndicator>
-            </Stat.Root>
-
-              <Flex justify="center" align="center" backgroundColor="orange.200" rounded="lg" p={4}>
-                <Icon size="xl" color="blue.700">
-                  <FaArrowTrendUp/>
-                </Icon>
-              </Flex>
-          </Card.Body>
-        </Card.Root>
-
+        <IndicatorCard
+          label="Taxa de Aprovação"
+          value={0.723}
+          indicator="+12% este mes"
+          icon={FaArrowTrendUp}
+          colorPallete="orange"
+        />
       </HStack>
     </DefaultLayout>
   );

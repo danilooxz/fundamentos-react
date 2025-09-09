@@ -15,8 +15,8 @@ export default function Home() {
       <HStack gap={8}>
         <IndicatorCard
           label="Total de Estudantes"
-          value={2345}
-          indicator="+33% este mes"
+          value={2342}
+          indicator="-32% este mes"
           icon={IoPeopleSharp}
           colorPallete="blue"
         />
@@ -39,7 +39,8 @@ export default function Home() {
 
         <IndicatorCard
           label="Taxa de Aprovação"
-          value={0.723}
+          value={0.32}
+          style="percent"
           indicator="+12% este mes"
           icon={FaArrowTrendUp}
           colorPallete="orange"

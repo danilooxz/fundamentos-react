@@ -14,7 +14,7 @@ export function IndicatorCard({ label, value, indicator, icon, colorPallete, ...
   const isNegative = indicator.trim().startsWith("-");
   const Indicator = isNegative ? Stat.DownIndicator : Stat.UpIndicator;
   return (
-    <Card.Root>
+    <Card.Root _hover={{ boxShadow: "md" }}>
       <Card.Body flexDir="row" alignItems="center" gap={6}>
         <Stat.Root>
           <Stat.Label fontSize="md"> {label} </Stat.Label>

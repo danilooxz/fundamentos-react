@@ -1,4 +1,4 @@
-import { Card, ColorPalette, HStack } from "@chakra-ui/react";
+import { Card, ColorPalette, HStack, SimpleGrid } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { BiAward, BiCalendar } from "react-icons/bi";
@@ -63,7 +63,7 @@ export default function Home() {
     },
   ];
 
-  const iconMap: Record<string, IconType> = {
+  const iconMapActivities: Record<string, IconType> = {
     enrollment: IoMdPeople,
     grade: BiAward,
     course: IoIosBook,
@@ -81,86 +81,88 @@ export default function Home() {
       tittle="Dashboard Acadêmico"
       descripition="Visão geral do sistema universitáro"
     >
-      <HStack gap={8}>
-        <IndicatorCard
-          label="Total de Estudantes"
-          value={2342}
-          indicator="-32% este mes"
-          icon={IoPeopleSharp}
-          colorPallete="blue"
-        />
+      <SimpleGrid row={2}>
+        <HStack gap={8}>
+          <IndicatorCard
+            label="Total de Estudantes"
+            value={2342}
+            indicator="-32% este mes"
+            icon={IoPeopleSharp}
+            colorPallete="blue"
+          />
 
-        <IndicatorCard
-          label="Professor Ativos"
-          value={53}
-          indicator="+1% este mes"
-          icon={FaGraduationCap}
-          colorPallete="green"
-        />
+          <IndicatorCard
+            label="Professor Ativos"
+            value={53}
+            indicator="+1% este mes"
+            icon={FaGraduationCap}
+            colorPallete="green"
+          />
 
-        <IndicatorCard
-          label="Cursos Oferecidos"
-          value={17}
-          indicator="+3% este mes"
-          icon={ImBooks}
-          colorPallete="red"
-        />
+          <IndicatorCard
+            label="Cursos Oferecidos"
+            value={17}
+            indicator="+3% este mes"
+            icon={ImBooks}
+            colorPallete="red"
+          />
 
-        <IndicatorCard
-          label="Taxa de Aprovação"
-          value={0.23}
-          style="percent"
-          minimumFractionDigits={2}
-          maximumFractionDigits={2}
-          indicator="+12% este mes"
-          icon={FaArrowTrendUp}
-          colorPallete="orange"
-        />
-      </HStack>
+          <IndicatorCard
+            label="Taxa de Aprovação"
+            value={0.23}
+            style="percent"
+            minimumFractionDigits={2}
+            maximumFractionDigits={2}
+            indicator="+12% este mes"
+            icon={FaArrowTrendUp}
+            colorPallete="orange"
+          />
+        </HStack>
 
-      <HStack mt={8} gap={8} alignItems="flex-start">
-        <Card.Root>
-          <Card.Header>
-            <Card.Title>Atividades recentes</Card.Title>
-          </Card.Header>
-          <Card.Body gap={6}>
-            {recentActivities.map((activity) => {
-              const ActivityIcon =
-                iconMap[activity.type] ?? AiFillQuestionCircle;
-              return (
-                <CustomCard
-                  key={activity.id}
-                  color="blue"
-                  icon={ActivityIcon}
-                  title={activity.title}
-                  time={activity.time}
-                />
-              );
-            })}
-          </Card.Body>
-        </Card.Root>
+        <HStack mt={8} gap={8} alignItems="flex-start">
+          <Card.Root>
+            <Card.Header>
+              <Card.Title>Atividades recentes</Card.Title>
+            </Card.Header>
+            <Card.Body gap={6}>
+              {recentActivities.map((activity) => {
+                const ActivityIcon =
+                  iconMapActivities[activity.type] ?? AiFillQuestionCircle;
+                return (
+                  <CustomCard
+                    key={activity.id}
+                    color="blue"
+                    icon={ActivityIcon}
+                    title={activity.title}
+                    time={activity.time}
+                  />
+                );
+              })}
+            </Card.Body>
+          </Card.Root>
 
-        <Card.Root>
-          <Card.Header>
-            <Card.Title>Proximos Eventos</Card.Title>
-          </Card.Header>
-          <Card.Body gap={6}>
-            {customCard.map((events) => {
-              const EventsIcon =
-                iconMapEvents[events.type] ?? AiFillQuestionCircle;
-              return (
-                <CustomCard
-                  key={events.id}
-                  color={events.color as ColorPalette}
-                  icon={EventsIcon}
-                  title={events.title}
-                  time={events.dateTime}
-                />
-              );
-            })}
-          </Card.Body>
-        </Card.Root>
-      </HStack>
+          <Card.Root>
+            <Card.Header>
+              <Card.Title>Proximos Eventos</Card.Title>
+            </Card.Header>
+            <Card.Body gap={6}>
+              {customCard.map((events) => {
+                const EventsIcon =
+                  iconMapEvents[events.type] ?? AiFillQuestionCircle;
+                return (
+                  <CustomCard
+                    key={events.id}
+                    color={events.color as ColorPalette}
+                    icon={EventsIcon}
+                    title={events.title}
+                    time={events.dateTime}
+                  />
+                );
+              })}
+            </Card.Body>
+          </Card.Root>
+        </HStack>
+      </SimpleGrid>
     </DefaultLayout>
   );
 }

@@ -45,21 +45,21 @@ export default function Home() {
       color: "blue",
       type: "exam",
       title: "Inicio das Provas Finais",
-      time: "15 Dez 2025 as 08:00",
+      dateTime: "15 Dez 2025 as 08:00",
     },
     {
       id: 2,
       color: "red",
       type: "meeting",
       title: "Reunião de Coordenadores",
-      time: "18 Dez 2025 as 14:00",
+      dateTime: "18 Dez 2025 as 14:00",
     },
     {
       id: 3,
       color: "orange",
       type: "deadline",
       title: "Fim de Semestre",
-      time: "20 Dez 2025 as 17:00",
+      dateTime: "20 Dez 2025 as 17:00",
     },
   ];
 
@@ -146,21 +146,20 @@ export default function Home() {
           </Card.Header>
           <Card.Body gap={6}>
             {customCard.map((events) => {
-              const ActivityIcon =
+              const EventsIcon =
                 iconMapEvents[events.type] ?? AiFillQuestionCircle;
               return (
                 <CustomCard
                   key={events.id}
                   color={events.color as ColorPalette}
-                  icon={ActivityIcon}
+                  icon={EventsIcon}
                   title={events.title}
-                  time={events.time}
+                  time={events.dateTime}
                 />
               );
             })}
           </Card.Body>
         </Card.Root>
-
       </HStack>
     </DefaultLayout>
   );

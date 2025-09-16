@@ -1,15 +1,15 @@
-import { Card, HStack } from "@chakra-ui/react";
+import { Card, ColorPalette, HStack } from "@chakra-ui/react";
+import { IconType } from "react-icons";
+import { AiFillQuestionCircle } from "react-icons/ai";
 import { BiAward, BiCalendar } from "react-icons/bi";
 import { FaGraduationCap } from "react-icons/fa";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { ImBooks } from "react-icons/im";
-import { IoIosBook, IoMdPeople } from "react-icons/io";
-import { IoPeopleSharp } from "react-icons/io5";
+import { IoIosBook, IoMdCalendar, IoMdPeople } from "react-icons/io";
+import { IoAlertCircle, IoPeopleSharp } from "react-icons/io5";
+import { CustomCard } from "@/components/CustomCard";
 import { IndicatorCard } from "@/components/IndicatorCard";
-import { RecentActivity } from "@/components/RecentActivity";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
-import { IconType } from "react-icons";
-import { AiFillQuestionCircle } from "react-icons/ai";
 
 export default function Home() {
   const recentActivities = [
@@ -35,7 +35,31 @@ export default function Home() {
       id: 4,
       type: "calendar",
       title: "Evento adicionado: Semana da Computação",
-      time: "2 min atrás",
+      time: "2 horas atrás",
+    },
+  ];
+
+  const customCard = [
+    {
+      id: 1,
+      color: "blue",
+      type: "exam",
+      title: "Inicio das Provas Finais",
+      time: "15 Dez 2025 as 08:00",
+    },
+    {
+      id: 2,
+      color: "red",
+      type: "meeting",
+      title: "Reunião de Coordenadores",
+      time: "18 Dez 2025 as 14:00",
+    },
+    {
+      id: 3,
+      color: "orange",
+      type: "deadline",
+      title: "Fim de Semestre",
+      time: "20 Dez 2025 as 17:00",
     },
   ];
 
@@ -44,6 +68,12 @@ export default function Home() {
     grade: BiAward,
     course: IoIosBook,
     calendar: BiCalendar,
+  };
+
+  const iconMapEvents: Record<string, IconType> = {
+    exam: IoAlertCircle,
+    meeting: IoMdPeople,
+    deadline: IoMdCalendar,
   };
 
   return (
@@ -88,7 +118,7 @@ export default function Home() {
         />
       </HStack>
 
-      <HStack mt={8}>
+      <HStack mt={8} gap={8} alignItems="flex-start">
         <Card.Root>
           <Card.Header>
             <Card.Title>Atividades recentes</Card.Title>
@@ -98,7 +128,7 @@ export default function Home() {
               const ActivityIcon =
                 iconMap[activity.type] ?? AiFillQuestionCircle;
               return (
-                <RecentActivity
+                <CustomCard
                   key={activity.id}
                   color="blue"
                   icon={ActivityIcon}
@@ -109,6 +139,28 @@ export default function Home() {
             })}
           </Card.Body>
         </Card.Root>
+
+        <Card.Root>
+          <Card.Header>
+            <Card.Title>Proximos Eventos</Card.Title>
+          </Card.Header>
+          <Card.Body gap={6}>
+            {customCard.map((events) => {
+              const ActivityIcon =
+                iconMapEvents[events.type] ?? AiFillQuestionCircle;
+              return (
+                <CustomCard
+                  key={events.id}
+                  color={events.color as ColorPalette}
+                  icon={ActivityIcon}
+                  title={events.title}
+                  time={events.time}
+                />
+              );
+            })}
+          </Card.Body>
+        </Card.Root>
+
       </HStack>
     </DefaultLayout>
   );

@@ -1,9 +1,6 @@
-import { Button, Card, createListCollection, HStack, Input, InputGroup, Portal, Select, SimpleGrid } from "@chakra-ui/react";
-import { BiFilterAlt, BiPlus } from "react-icons/bi";
-import { BsDownload } from "react-icons/bs";
-import { LuSearch } from "react-icons/lu";
-import { DefaultLayout } from "@/layouts/DefaultLayout";
+import { HStack } from "@chakra-ui/react";
 import { HeaderTable } from "@/components/HeaderTable";
+import { DefaultLayout } from "@/layouts/DefaultLayout";
 
 export default function Students() {
   return (
@@ -12,8 +9,8 @@ export default function Students() {
       descripition="Gerencie informações dos estudantes matrículados"
     >
       <HStack>
-        <HeaderTable/>
+        <HeaderTable />
       </HStack>
     </DefaultLayout>
-  )
+  );
 }

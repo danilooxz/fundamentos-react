@@ -1,6 +1,5 @@
 import { Table as ChakraTable} from "@chakra-ui/react"
 import {
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,

@@ -1,8 +1,10 @@
 import { VStack } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
+import { useEffect } from "react";
 import { HeaderTable } from "@/components/HeaderTable";
 import { Table } from "@/components/Table";
 import { DefaultLayout } from "@/layouts/DefaultLayout";
+import { api } from "@/services/apiClient";
 
 type Student = {
   fullname: string;
@@ -26,7 +28,7 @@ export default function Students() {
     {
       fullname: "Bruno Henrique Souza",
       email: "bruno.souza@email.com",
-      course: "Ciência da Computação",
+      course: "Medicina",
       semester: "3º",
       status: "Ativo",
       enrollment: "2021023",
@@ -34,7 +36,7 @@ export default function Students() {
     {
       fullname: "Carla Mendes Oliveira",
       email: "carla.oliveira@email.com",
-      course: "Sistemas de Informação",
+      course: "Direito",
       semester: "7º",
       status: "Trancado",
       enrollment: "2020008",
@@ -42,7 +44,7 @@ export default function Students() {
     {
       fullname: "Diego Ferreira Costa",
       email: "diego.costa@email.com",
-      course: "Análise e Desenvolvimento de Sistemas",
+      course: "Markting",
       semester: "4º",
       status: "Ativo",
       enrollment: "2021045",
@@ -50,7 +52,47 @@ export default function Students() {
     {
       fullname: "Eduarda Lima Santos",
       email: "eduarda.santos@email.com",
-      course: "Engenharia da Computação",
+      course: "Administração",
+      semester: "6º",
+      status: "Inativo",
+      enrollment: "2019056",
+    },
+    {
+      fullname: "Ana Beatriz Silva",
+      email: "ana.silva@email.com",
+      course: "Estética e Cosmetica",
+      semester: "5º",
+      status: "Ativo",
+      enrollment: "2021001",
+    },
+    {
+      fullname: "Bruno Henrique Souza",
+      email: "bruno.souza@email.com",
+      course: "Engenharia Civil",
+      semester: "3º",
+      status: "Ativo",
+      enrollment: "2021023",
+    },
+    {
+      fullname: "Carla Mendes Oliveira",
+      email: "carla.oliveira@email.com",
+      course: "Arquitetura e Urbanismo",
+      semester: "7º",
+      status: "Trancado",
+      enrollment: "2020008",
+    },
+    {
+      fullname: "Diego Ferreira Costa",
+      email: "diego.costa@email.com",
+      course: "Psicologia",
+      semester: "4º",
+      status: "Ativo",
+      enrollment: "2021045",
+    },
+    {
+      fullname: "Eduarda Lima Santos",
+      email: "eduarda.santos@email.com",
+      course: "Geografia",
       semester: "6º",
       status: "Inativo",
       enrollment: "2019056",
@@ -81,10 +123,19 @@ export default function Students() {
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor("enrollment", {
-      header: "Matéria",
+      header: "Matrícula",
       cell: (info) => info.getValue(),
     }),
   ];
+
+  useEffect(() => {
+    async function load() {
+      const { data } = await api.get("/students");
+
+      console.log(data);
+    }
+    load();
+  }, []);
 
   return (
     <DefaultLayout

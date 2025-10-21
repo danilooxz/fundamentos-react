@@ -130,14 +130,14 @@ export default function Students() {
 
   const [students, setStudents] = useState<Student[]>([]);
 
-  useEffect(() => {
-    async function load() {
-      const { data } = await api.get("/students");
+  // useEffect(() => {
+  //   async function load() {
+  //     const { data } = await api.get("/students");
 
-      setStudents(data);
-    }
-    load();
-  }, []);
+  //     setStudents(data);
+  //   }
+  //   load();
+  // }, []);
 
   return (
     <DefaultLayout
